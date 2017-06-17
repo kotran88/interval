@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/Lin_lay"
+	>
+
+	<CheckBox
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:id="@+id/checkBox"
+		android:layout_alignParentTop="true"
+		android:gravity="center"
+	    android:visibility="gone"
+	    android:buttonTint="@android:color/black"
+		android:paddingTop="23dp"
+		android:paddingBottom="23dp"
+	    android:paddingRight="3dp"
+	    android:paddingLeft="5dp"
+		/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:id="@+id/text_title1"
+		android:textSize="25dp"
+		android:textColor="@android:color/black"
+		android:layout_toRightOf="@id/checkBox"
+		android:paddingTop="13dp"
+		android:paddingBottom="3dp"
+		android:paddingRight="3dp"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="운동시간 : "
+		android:id="@+id/exercise_time"
+		android:textColor="@android:color/black"
+	    android:layout_toRightOf="@id/text_title1"
+		android:paddingTop="13dp"
+		android:paddingBottom="3dp"
+		android:paddingLeft="10dp"
+		/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="쉬는시간 : "
+
+		android:id="@+id/exercise_rest"
+		android:textColor="@android:color/black"
+		android:paddingTop="13dp"
+		android:paddingBottom="3dp"
+		android:paddingLeft="8dp"
+		android:layout_toRightOf="@id/exercise_time"
+		android:layout_alignParentEnd="true"/>
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="인터벌 시간 : "
+		android:gravity="center"
+		android:id="@+id/exercise_interval"
+		android:layout_below="@id/exercise_time"
+		android:textColor="@android:color/black"
+		android:layout_toRightOf="@id/text_title1"
+	    android:paddingLeft="10dp"
+	    android:layout_alignLeft="@id/exercise_time"/>
+
+
+
+</RelativeLayout>
