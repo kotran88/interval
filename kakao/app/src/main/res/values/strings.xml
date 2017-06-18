@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">kakao</string>
+
+    <string name="kakao_app_key">44103ae11609f337f198322306f1a694</string>
+    <string name="facebook_app_id">1463732306980386</string>
+    <string name="fb_login_protocol_scheme">fb1463732306980386</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">5e41eae2ad2b764e59dd95a21e29cf97</string>
+
+</resources>
