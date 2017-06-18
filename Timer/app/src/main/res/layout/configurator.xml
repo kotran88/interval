@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="1">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<TextView
+			android:layout_width="55dp"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="음성/진동"
+			android:id="@+id/textView"
+			android:gravity="center"
+			android:layout_weight="0.34"
+			android:layout_gravity="center"/>
+
+		<ToggleButton
+		android:layout_width="55dp"
+		android:layout_height="wrap_content"
+		android:textOn="음성"
+		android:textOff="진동"
+		android:id="@+id/sound_toggle"
+		android:layout_gravity="center_horizontal"
+		android:checked="true"
+		android:layout_weight="0.46"/>
+	</LinearLayout>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="55dp"
+
+		>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="※진동 설정시 운동시작/남은시간 카운트 다운에서 진동으로 알려줍니다.."
+			android:layout_centerVertical="true"
+			android:layout_alignParentStart="true"
+			android:layout_marginStart="64dp"/>
+
+	</RelativeLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<TextView
+			android:layout_width="55dp"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="운동간 휴식"
+			android:id="@+id/textView3"
+			android:layout_weight="0.34"
+			android:layout_gravity="center"
+			android:gravity="center"/>
+
+		<ToggleButton
+			android:layout_width="55dp"
+			android:layout_height="wrap_content"
+			android:id="@+id/interval_toggle"
+			android:textOn="켬"
+			android:textOff="끔"
+			android:checked="true"
+			android:layout_weight="0.46"
+			android:gravity="center"/>
+
+	</LinearLayout>
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="55dp"
+
+		>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="※여러 운동을 할 경우, 운동간에 인터벌(휴식)시간을 설정합니다."
+			android:layout_centerVertical="true"
+			android:layout_alignParentStart="true"
+			android:layout_marginStart="63dp"/>
+
+	</RelativeLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/Linear"
+		>
+
+		<RadioGroup
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="horizontal"
+			android:layout_gravity="center"
+
+			android:gravity="center">
+			<RadioButton
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="5초"
+				android:id="@+id/five_second"
+				/>
+			<RadioButton
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="10초"
+				android:id="@+id/ten_second"
+				/>
+			<RadioButton
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="20초"
+				android:id="@+id/twenty_second"
+				/>
+			<RadioButton
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="30초"
+				android:id="@+id/thirty_second"
+				/>
+			<RadioButton
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="입력"
+				android:id="@+id/direct"
+			    android:paddingRight="2dp"
+				/>
+
+		</RadioGroup>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:visibility="invisible"
+		android:id="@+id/lay_direct"
+		android:weightSum="1">
+
+
+		<EditText
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:inputType="number"
+			android:ems="10"
+			android:id="@+id/wished_inteval_time"
+			android:hint="운동간 휴식시간 입력해주세요"
+
+			android:layout_weight="0.28"/>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<TextView
+			android:layout_width="55dp"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text="화면켜짐유지"
+			android:id="@+id/textView4"
+			android:layout_weight="0.34"
+			android:layout_gravity="center"
+			android:gravity="center"/>
+
+		<ToggleButton
+			android:layout_width="55dp"
+			android:layout_height="wrap_content"
+			android:id="@+id/screen_toggle"
+			android:textOn="켬"
+			android:textOff="끔"
+			android:checked="true"
+			android:layout_weight="0.46"
+			android:gravity="center"/>
+
+	</LinearLayout>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+
+		android:layout_weight="0.09">
+
+		<Button
+			android:background="@drawable/border_help"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="저장"
+			android:id="@+id/configure_save"
+			android:gravity="center"
+			android:layout_gravity="center_horizontal"
+			android:layout_alignParentTop="true"
+			android:layout_centerHorizontal="true"
+			android:layout_marginTop="12dp"/>
+
+	</RelativeLayout>
+
+
+</LinearLayout>

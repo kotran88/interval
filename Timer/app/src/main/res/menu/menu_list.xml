@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/exercise_plus"
+		android:orderInCategory="100"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		app:showAsAction="always"
+		android:icon="@drawable/plus"
+		android:title="추가"/>
+	<item
+		android:id="@+id/exercise_play"
+		android:icon="@drawable/play"
+		android:orderInCategory="100"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		app:showAsAction="always"
+		android:title="시작"/>
+
+	<item
+		android:id="@+id/configuration"
+		android:orderInCategory="100"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		app:showAsAction="always"
+		android:icon="@drawable/settings"
+		android:title="설정"/>
+	<item
+		android:id="@+id/help"
+		android:orderInCategory="100"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		app:showAsAction="ifRoom"
+		android:title="도움말"/>
+
+
+
+</menu>

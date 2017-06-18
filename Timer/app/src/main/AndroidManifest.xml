@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="app.org.scit.timer"
+	android:versionCode="3"
+          android:versionName="1.1"
+	>
+	<uses-sdk
+		android:minSdkVersion="14" />
+
+	<uses-permission android:name="android.permission.VIBRATE"/>
+	<application
+
+		android:allowBackup="true"
+		android:icon="@mipmap/my_icon"
+		android:label="심플인터벌"
+		android:logo="@mipmap/my_icon"
+		android:supportsRtl="true"
+
+		android:theme="@style/Theme.AppCompat.Light"
+		>
+		<activity android:name=".MainActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
+
+		<activity android:name=".MainActivity2">
+
+
+		</activity>
+	</application>
+
+</manifest>

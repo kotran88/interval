@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		>
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/border_help"
+			>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text=" 소개 -메인화면- "
+				/>
+		</RelativeLayout>
+
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="49dp"
+			android:background="@drawable/upper"
+			android:id="@+id/imageView"
+
+			/>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="10dp">
+
+		</LinearLayout>
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			>
+
+			<TextView
+				android:paddingLeft="10dp"
+
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text="운동을 추가할 수 있습니다. "
+				android:id="@+id/textView7"
+				android:layout_gravity="center_vertical"
+				android:layout_centerVertical="true"
+				android:layout_toEndOf="@+id/imageView1"/>
+
+			<ImageView
+				android:layout_width="32dp"
+				android:layout_height="35dp"
+				android:background="@drawable/plus"
+				android:id="@+id/imageView1"
+				android:layout_marginStart="14dp"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentStart="true"/>
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			>
+
+			<TextView
+				android:paddingLeft="10dp"
+
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text="리스트에서 실행하고자 하는 운동을 최대 5개까지 실행합니다."
+				android:id="@+id/textView9"
+				android:layout_gravity="center_vertical"
+				android:layout_centerVertical="true"
+				android:layout_toEndOf="@+id/imageView2"/>
+
+			<ImageView
+				android:layout_width="32dp"
+				android:layout_height="35dp"
+				android:background="@drawable/play"
+				android:id="@+id/imageView2"
+				android:layout_marginStart="15dp"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentStart="true"/>
+		</RelativeLayout>
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			>
+
+			<TextView
+				android:paddingLeft="10dp"
+
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text="음성/운동간 쉬는 시간을 설정합니다."
+				android:id="@+id/textView8"
+				android:layout_gravity="center_vertical"
+				android:layout_centerVertical="true"
+				android:layout_toEndOf="@+id/imageView3"/>
+
+			<ImageView
+				android:layout_width="32dp"
+				android:layout_height="35dp"
+				android:background="@drawable/settings"
+				android:id="@+id/imageView3"
+				android:layout_marginStart="16dp"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentStart="true"/>
+		</RelativeLayout>
+
+
+	</LinearLayout>
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@drawable/border_help"
+		>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:text=" 운동 리스트 "
+			/>
+	</RelativeLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="271dp"
+			>
+
+
+
+			<ImageView
+				android:layout_width="300dp"
+				android:layout_height="150dp"
+				android:background="@drawable/main_list"
+				android:id="@+id/imageView4"
+				android:layout_marginStart="16dp"
+				android:layout_alignParentTop="true"
+				android:layout_alignParentStart="true"/>
+			<TextView
+				android:paddingLeft="10dp"
+				android:layout_below="@id/imageView4"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text="추가한 운동이 리스트로 표시되며,\n오래 누르면 삭제됩니다."
+				android:id="@+id/textView10"
+				android:layout_gravity="center_vertical"
+				android:layout_centerHorizontal="true"/>
+
+
+			<Button
+				android:text="다음"
+				android:background="@drawable/border"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/btn_next"
+				android:layout_below="@+id/textView10"
+				android:layout_centerHorizontal="true"/>
+		</RelativeLayout>
+	</LinearLayout>
+
+
+
+
+</LinearLayout>
+<!--	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+
+
+
+	</LinearLayout>
+	<LinearLayout
+	android:layout_width="match_parent"
+	android:layout_height="180dp"
+	android:background="@drawable/border"
+	android:weightSum="1">
+	<ImageView
+
+		android:layout_width="91dp"
+		android:layout_height="149dp"
+		android:background="@drawable/exer_config"
+		android:id="@+id/imageView1"
+		android:layout_gravity="center"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="원하는 운동 제목\n운동 한 구간당 시간\n운동간에 쉬는 시간\n운동중 쉬는시간\n설정이가능합니다."
+		android:id="@+id/textView8"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_weight="0.48"
+		android:layout_gravity="center"/>
+
+</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<ImageView
+
+			android:layout_width="207dp"
+			android:layout_height="123dp"
+			android:scaleType="center"
+			android:background="@drawable/exer_configuration"
+			android:id="@+id/imageView3"
+			/>
+
+	</LinearLayout>-->
+
+

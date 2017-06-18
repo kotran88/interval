@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lytPattern"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f9f9f9" >
+
+
+
+    <LinearLayout
+        android:id="@+id/lytPatternText"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="16dp" >
+
+        <TextView
+            android:id="@+id/Exercise_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:paddingRight="8dp"
+            android:textColor="#666"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:id="@+id/Exercise_Time12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:paddingRight="8dp"
+            android:textColor="#666"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lytPatternText1"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/Exercise_RestTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            android:paddingRight="8dp"
+            android:textColor="#666"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/Exercise_IntervalCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="34"
+            android:paddingRight="8dp"
+            android:textColor="#666"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lytGrab"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:gravity="center_vertical"
+        android:paddingRight="16dp"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="31dp"
+        android:layout_marginEnd="31dp">
+
+        <ImageView
+            android:id="@+id/imageViewGrab"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:src="@mipmap/ic_drag_drop" />
+    </LinearLayout>
+
+
+</RelativeLayout>
