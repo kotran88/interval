@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:id="@+id/lin_back2"
+	android:background="#00ffff"
+	>
+
+	<LinearLayout
+		android:id="@+id/lin_back"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="#ffffff"
+
+		android:orientation="vertical"
+		android:layout_alignParentBottom="true">
+
+		<scit.org.kakao.DynamicListView
+			android:layout_below="@+id/t1"
+
+			android:id="@+id/listview"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent" />
+
+
+	</LinearLayout>
+</RelativeLayout>

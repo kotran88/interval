@@ -153,12 +153,21 @@
 		android:gravity="center"/>
 
 	<Button
+		android:id="@+id/Stop"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="일시정지"
-		android:id="@+id/Stop"
 		android:layout_gravity="center_horizontal"
 		android:background="@drawable/border"
-		android:theme="@android:style/Widget.Holo.Light.Button.Inset"/>
+		android:text="일시정지"
+		android:theme="@android:style/Widget.Holo.Light.Button.Inset" />
+
+	<Button
+		android:id="@+id/kakao_logout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:background="@drawable/border"
+		android:text="일시정지"
+		android:theme="@android:style/Widget.Holo.Light.Button.Inset" />
 
 </LinearLayout>

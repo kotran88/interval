@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/custom_title2"
+    android:background="#ffffff" >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_foto"
+        />
+    <TextView
+        android:id="@+id/my"
+        android:layout_width="wrap_content"
+        android:layout_height="100px"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:lineSpacingExtra="18sp"
+        android:text="dddddddd"
+        android:textAlignment="textStart"
+        android:textColor="#000"
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/exercise_plus"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:adjustViewBounds="true"
+        android:background="@drawable/plus"
+        android:layout_marginRight="20dp"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/my"
+         />
+    <ImageButton
+        android:id="@+id/exercise_play"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:adjustViewBounds="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/play"
+        android:padding="5sp"
+        android:scaleType="centerCrop"
+        android:layout_alignTop="@+id/configuration"
+        android:layout_toEndOf="@+id/exercise_plus"
+        />
+    <ImageButton
+        android:id="@+id/configuration"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_marginRight="20dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/settings"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        android:layout_alignTop="@+id/exercise_plus"
+        android:layout_toEndOf="@+id/exercise_play"
+        />
+
+
+    <ImageButton
+        android:id="@+id/stat"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:adjustViewBounds="true"
+        android:background="@drawable/stat"
+        android:padding="5sp"
+        android:scaleType="centerCrop"
+        android:layout_alignTop="@+id/configuration"
+        android:layout_toEndOf="@+id/configuration" />
+
+</RelativeLayout>

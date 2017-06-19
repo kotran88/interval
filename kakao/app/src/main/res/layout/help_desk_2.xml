@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		>
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/border_help"
+			>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text=" -운동화면- "
+				/>
+		</RelativeLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="10dp">
+
+		</LinearLayout>
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="194dp">
+
+			<ImageView
+				android:layout_width="150dp"
+				android:layout_height="230dp"
+				android:background="@drawable/help2"
+				android:id="@+id/imageView"
+
+				android:layout_alignParentTop="true"
+				android:layout_centerHorizontal="true"/>
+
+
+		</RelativeLayout>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="10dp">
+
+		</LinearLayout>
+
+		<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="227dp"
+
+			>
+
+			<Button
+				android:background="@drawable/border_help"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="확인"
+				android:id="@+id/btn_end"
+				android:layout_below="@+id/a2"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="17dp"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:text="매 초 각 페이즈마다 남은 시간이 표시됩니다."
+				android:id="@+id/a2"
+				android:layout_below="@+id/a1"
+				android:layout_alignStart="@+id/a1"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/a1"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:text="현재 진행중인 운동이 몇번째인지 나타내며 버튼을 통해서 운동간 전환이 가능합니다.\n현재 진행중인 운동 정보가 표시됩니다 "
+				android:layout_alignParentTop="true"
+				android:layout_centerHorizontal="true"/>
+
+		</RelativeLayout>
+
+	</LinearLayout>
+
+
+</LinearLayout>
+<!--	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+
+
+
+	</LinearLayout>
+	<LinearLayout
+	android:layout_width="match_parent"
+	android:layout_height="180dp"
+	android:background="@drawable/border"
+	android:weightSum="1">
+	<ImageView
+
+		android:layout_width="91dp"
+		android:layout_height="149dp"
+		android:background="@drawable/exer_config"
+		android:id="@+id/imageView1"
+		android:layout_gravity="center"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="원하는 운동 제목\n운동 한 구간당 시간\n운동간에 쉬는 시간\n운동중 쉬는시간\n설정이가능합니다."
+		android:id="@+id/textView8"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_weight="0.48"
+		android:layout_gravity="center"/>
+
+</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		<ImageView
+
+			android:layout_width="207dp"
+			android:layout_height="123dp"
+			android:scaleType="center"
+			android:background="@drawable/exer_configuration"
+			android:id="@+id/imageView3"
+			/>
+
+	</LinearLayout>-->
+
+

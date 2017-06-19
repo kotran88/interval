@@ -1,4 +1,4 @@
-package scit.org.kakao;
+package app.org.scit.timer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,10 +9,9 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 
-import com.facebook.CallbackManager;
-import com.facebook.login.widget.LoginButton;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
+import com.kakao.usermgmt.LoginButton;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
 
@@ -23,17 +22,14 @@ import java.security.MessageDigest;
  */
 public class LoginActivity extends Activity {
     private SessionCallback callback;
-    CallbackManager callbackManager;
     LoginButton loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         getAppKeyHash();
+        loginButton=(LoginButton)findViewById(R.id.login_button);
 
-        if (getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
         Session.getCurrentSession().checkAndImplicitOpen();
@@ -88,7 +84,7 @@ public class LoginActivity extends Activity {
         }
     }
     protected void redirectSignupActivity() {       //세션 연결 성공 시 SignupActivity로 넘김
-        final Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, SignupActivity.class);
         Log.e("main","redirectSignupActivity");
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
