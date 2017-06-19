@@ -147,78 +147,7 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()){
 			case R.id.exercise_plus :
-				Log.e("main", "운동 추가 ");
-				view=activity.getLayoutInflater().inflate(R.layout.exer_config,null);
-				final Dialog listViewDialog=new Dialog(activity);
-				// 리스트뷰 설정된 레이아웃
-				listViewDialog.setContentView(view);
 
-				Button bt=(Button)view.findViewById(R.id.Exer_start);
-				Window window = listViewDialog.getWindow();
-				window.setLayout(lin_back.getWidth(), lin_back.getHeight()*9/10);
-
-//
-				bt.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						EditText exer_time_min=(EditText)view.findViewById(R.id.exer_time_minute);
-						EditText exer_time_sec=(EditText)view.findViewById(R.id.exer_time_second);
-						int total_time=0;
-						int min=0;
-						int sec=0;
-						if(exer_time_min.getText().toString().equals("")){
-							sec=Integer.parseInt(exer_time_sec.getText().toString());
-
-							total_time=sec;
-							//초만입력했을때
-						}else if(exer_time_sec.getText().toString().equals("")){
-							//분만입력했을때,
-							min=Integer.parseInt(exer_time_min.getText().toString())*60;
-							total_time=min;
-						}else{
-							//분초 모두입력시
-							min=Integer.parseInt(exer_time_min.getText().toString())*60;
-							sec=Integer.parseInt(exer_time_sec.getText().toString());
-							total_time=min+sec;
-						}
-
-						Log.e("main","분,초 : "+total_time);
-
-
-						EditText exer_title=(EditText)view.findViewById(R.id.exer_title);
-						EditText exer_rest=(EditText)view.findViewById(R.id.exer_rest);
-						EditText exer_interval=(EditText)view.findViewById(R.id.exer_interval);
-						if(exer_title.getText().length()==0){
-							Log.e("main","입력해주세요");
-						}else{
-
-							Log.e("main","운동 시작 버튼 클릭"+exer_title.getText()+exer_interval.getText());
-							Log.e("main","clicked!");
-							String query="INSERT INTO exercise " +
-									"(title,time,rest,interval,selected) "+
-									"VALUES('" +exer_title.getText().toString()+ "' , '"+total_time+"','"+exer_rest.getText()+"','"+exer_interval.getText()+"','false')";
-							db.execSQL(query);
-							Log.e("main", "회원가입완료");
-
-							listViewDialog.dismiss();
-
-
-							Exercise ex=new Exercise(Integer.parseInt(exer_interval.getText().toString() ),Integer.parseInt(exer_rest.getText().toString()),
-									total_time, exer_title.getText().toString(),false);
-							list_exercise.add(ex);
-							listviewadapter.setmIdMap(list_exercise);
-							listviewadapter.notifyDataSetChanged();
-							//listviewadapter.setExercise_List(list_exercise);
-							//listviewadapter.setTitle(exer_title.getText().toString());
-
-
-						}
-
-					}
-				});
-
-				// 다이얼로그 보기
-				listViewDialog.show();
 
 
 				break;
@@ -506,6 +435,78 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(getApplicationContext(),"plus ",Toast.LENGTH_LONG).show();
+				Log.e("main", "운동 추가 ");
+				view=activity.getLayoutInflater().inflate(R.layout.exer_config,null);
+				final Dialog listViewDialog=new Dialog(activity);
+				// 리스트뷰 설정된 레이아웃
+				listViewDialog.setContentView(view);
+
+				Button bt=(Button)view.findViewById(R.id.Exer_start);
+				Window window = listViewDialog.getWindow();
+				window.setLayout(lin_back.getWidth(), lin_back.getHeight()*9/10);
+
+//
+				bt.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						EditText exer_time_min=(EditText)view.findViewById(R.id.exer_time_minute);
+						EditText exer_time_sec=(EditText)view.findViewById(R.id.exer_time_second);
+						int total_time=0;
+						int min=0;
+						int sec=0;
+						if(exer_time_min.getText().toString().equals("")){
+							sec=Integer.parseInt(exer_time_sec.getText().toString());
+
+							total_time=sec;
+							//초만입력했을때
+						}else if(exer_time_sec.getText().toString().equals("")){
+							//분만입력했을때,
+							min=Integer.parseInt(exer_time_min.getText().toString())*60;
+							total_time=min;
+						}else{
+							//분초 모두입력시
+							min=Integer.parseInt(exer_time_min.getText().toString())*60;
+							sec=Integer.parseInt(exer_time_sec.getText().toString());
+							total_time=min+sec;
+						}
+
+						Log.e("main","분,초 : "+total_time);
+
+
+						EditText exer_title=(EditText)view.findViewById(R.id.exer_title);
+						EditText exer_rest=(EditText)view.findViewById(R.id.exer_rest);
+						EditText exer_interval=(EditText)view.findViewById(R.id.exer_interval);
+						if(exer_title.getText().length()==0){
+							Log.e("main","입력해주세요");
+						}else{
+
+							Log.e("main","운동 시작 버튼 클릭"+exer_title.getText()+exer_interval.getText());
+							Log.e("main","clicked!");
+							String query="INSERT INTO exercise " +
+									"(title,time,rest,interval,selected) "+
+									"VALUES('" +exer_title.getText().toString()+ "' , '"+total_time+"','"+exer_rest.getText()+"','"+exer_interval.getText()+"','false')";
+							db.execSQL(query);
+							Log.e("main", "회원가입완료");
+
+							listViewDialog.dismiss();
+
+
+							Exercise ex=new Exercise(Integer.parseInt(exer_interval.getText().toString() ),Integer.parseInt(exer_rest.getText().toString()),
+									total_time, exer_title.getText().toString(),false);
+							list_exercise.add(ex);
+							listviewadapter.setmIdMap(list_exercise);
+							listviewadapter.notifyDataSetChanged();
+							//listviewadapter.setExercise_List(list_exercise);
+							//listviewadapter.setTitle(exer_title.getText().toString());
+
+
+						}
+
+					}
+				});
+
+				// 다이얼로그 보기
+				listViewDialog.show();
 			}
 		});
 
