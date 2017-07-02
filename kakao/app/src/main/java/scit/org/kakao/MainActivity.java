@@ -116,6 +116,7 @@ public class MainActivity extends Activity {
 	private ArrayList<Integer> list_exerciseTime=new ArrayList<>();
 	private LinearLayout lin_back;
 	private String kakaoNickname;
+	private Dialog_new mCustomDialog;
 
 	public enum Rest{SUPERLEAST("10초"),LEAST("20초"),MIDIUM("30초"),LAGEST("40초"),SUPERLARGE("50초");
 		private String span;
@@ -152,42 +153,7 @@ public class MainActivity extends Activity {
 
 				break;
 			case R.id.exercise_play:
-				 list_result=new ArrayList<>();
-				for(int i=0; i<list_exercise.size(); i++){
-					if(list_exercise.get(i).isSelected()==true){
-						list_result.add(list_exercise.get(i));
 
-					}
-				}
-
-				Log.e("main","총 플레이할 것은 : "+list_result);
-
-				if(list_result.size()==0){
-					Log.e("main","no list error");
-					Toast.makeText(getApplicationContext(), "시작할 운동을 선택해주세요",Toast.LENGTH_SHORT).show();
-				}else {
-					Log.e("main", sound + "소리여부");
-					if (sound == false) {
-						Log.e("main", sound + "ㅎㅎㅎ");
-					} else {
-						String toSpeak=null;
-						Log.e("main", sound + "ㅋㅋㅎㅎ");
-						if(list_result.get(0).getTime()>59&&list_result.get(0).getTime()%60==0){
-							toSpeak = list_result.get(0).getTitle() + "를" + list_result.get(0).getTime()/60 + "분 시작합니다.";
-						}else if(list_result.get(0).getTime()>59&&list_result.get(0).getTime()%60!=0){
-							toSpeak = list_result.get(0).getTitle() + "를" + list_result.get(0).getTime()/60 + "분 "+list_result.get(0).getTime()%60+"초 시작합니다.";
-						}else if(list_result.get(0).getTime()<60){
-
-							toSpeak = list_result.get(0).getTitle() + "를" + list_result.get(0).getTime()%60+"초 시작합니다.";
-						}
-						t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
-					}
-					//운동화면으로 넘어간다.
-					Intent intent = new Intent(this, MainActivity2.class);
-					intent.putExtra("exercise", list_result);
-					startActivity(intent);
-
-				}
 
 				break;
 
@@ -241,6 +207,198 @@ public class MainActivity extends Activity {
 				break;
 			case  R.id.configuration:
 
+
+		}
+
+
+		return super.onOptionsItemSelected(item);
+	}
+*/
+
+
+
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		lin_back=(LinearLayout)findViewById(R.id.lin_back);
+		Log.e("main",",,OnWindowFocusChanged!!"+lin_back.getWidth()+","+lin_back.getHeight());
+	}
+	private View.OnClickListener leftListener = new View.OnClickListener() {
+		public void onClick(View v) {
+			Toast.makeText(getApplicationContext(), "왼쪽버튼 클릭",
+					Toast.LENGTH_SHORT).show();
+			mCustomDialog.dismiss();
+		}
+	};
+
+	private View.OnClickListener rightListener = new View.OnClickListener() {
+		public void onClick(View v) {
+			Toast.makeText(getApplicationContext(), "오른쪽버튼 클릭",
+					Toast.LENGTH_SHORT).show();
+		}
+	};
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		activity=this;
+
+		requestMe();
+		SharedPreferences sd=getSharedPreferences("shared_sound",0);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		RelativeLayout r1=(RelativeLayout)findViewById(R.id.custom_title2);
+
+
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custome_title);
+		setContentView(R.layout.list_view);
+
+		ImageButton plus=(ImageButton)findViewById(R.id.exercise_plus);
+		plus.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(getApplicationContext(), "plus ", Toast.LENGTH_LONG).show();
+				Log.e("main", "운동 추가 ");
+				mCustomDialog = new Dialog_new(activity,
+						"[다이얼로그 제목]", // 제목
+						"다이얼로그 내용 표시하기", // 내용
+						leftListener, // 왼쪽 버튼 이벤트
+						rightListener); // 오른쪽 버튼 이벤트
+				mCustomDialog.show();
+				Window window1 = mCustomDialog.getWindow();
+				window1.setLayout(1200, 1500);
+
+				Button bt=(Button)mCustomDialog.findViewById(R.id.Exer_start);
+				bt.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+
+						EditText exer_time_min=(EditText)mCustomDialog.findViewById(R.id.exer_time_minute);
+						EditText exer_time_sec=(EditText)mCustomDialog.findViewById(R.id.exer_time_second);
+						int total_time=0;
+						int min=0;
+						int sec=0;
+						if(exer_time_min.getText().toString().equals("")){
+							sec=Integer.parseInt(exer_time_sec.getText().toString());
+
+							total_time=sec;
+							//초만입력했을때
+						}else if(exer_time_sec.getText().toString().equals("")){
+							//분만입력했을때,
+							min=Integer.parseInt(exer_time_min.getText().toString())*60;
+							total_time=min;
+						}else{
+							//분초 모두입력시
+							min=Integer.parseInt(exer_time_min.getText().toString())*60;
+							sec=Integer.parseInt(exer_time_sec.getText().toString());
+							total_time=min+sec;
+						}
+
+						Log.e("main","분,초 : "+total_time);
+
+
+						EditText exer_title=(EditText)mCustomDialog.findViewById(R.id.exer_title);
+						EditText exer_rest=(EditText)mCustomDialog.findViewById(R.id.exer_rest);
+						EditText exer_interval=(EditText)mCustomDialog.findViewById(R.id.exer_interval);
+						if(exer_title.getText().length()==0){
+							Log.e("main","입력해주세요");
+						}else{
+
+							Log.e("main","운동 시작 버튼 클릭"+exer_title.getText()+exer_interval.getText());
+							Log.e("main","clicked!");
+							String query="INSERT INTO exercise " +
+									"(title,time,rest,interval,selected) "+
+									"VALUES('" +exer_title.getText().toString()+ "' , '"+total_time+"','"+exer_rest.getText()+"','"+exer_interval.getText()+"','false')";
+							db.execSQL(query);
+							Log.e("main", "회원가입완료");
+
+							mCustomDialog.dismiss();
+
+
+							Exercise ex=new Exercise(Integer.parseInt(exer_interval.getText().toString() ),Integer.parseInt(exer_rest.getText().toString()),
+									total_time, exer_title.getText().toString(),false);
+							list_exercise.add(ex);
+							listviewadapter.setmIdMap(list_exercise);
+							listviewadapter.notifyDataSetChanged();
+							//listviewadapter.setExercise_List(list_exercise);
+							//listviewadapter.setTitle(exer_title.getText().toString());
+
+
+						}
+
+					}
+
+
+				});
+
+				Button quit=(Button)mCustomDialog.findViewById(R.id.Cancel);
+				quit.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						mCustomDialog.dismiss();
+					}
+				});
+
+
+			}
+		});
+
+
+
+		ImageButton play=(ImageButton)findViewById(R.id.exercise_play);
+		play.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				list_result=new ArrayList<>();
+				for(int i=0; i<list_exercise.size(); i++){
+					if(list_exercise.get(i).isSelected()==true){
+						list_result.add(list_exercise.get(i));
+
+					}
+				}
+
+				Log.e("main","총 플레이할 것은 : "+list_result);
+
+				if(list_result.size()==0){
+					Log.e("main","no list error");
+					Toast.makeText(getApplicationContext(), "시작할 운동을 선택해주세요",Toast.LENGTH_SHORT).show();
+				}else {
+					Log.e("main", sound + "소리여부");
+					if (sound == false) {
+						Log.e("main", sound + "ㅎㅎㅎ");
+					} else {
+						String toSpeak=null;
+						Log.e("main", sound + "ㅋㅋㅎㅎ");
+						if(list_result.get(0).getTime()>59&&list_result.get(0).getTime()%60==0){
+							toSpeak = list_result.get(0).getTitle() + "를" + list_result.get(0).getTime()/60 + "분 시작합니다.";
+						}else if(list_result.get(0).getTime()>59&&list_result.get(0).getTime()%60!=0){
+							toSpeak = list_result.get(0).getTitle() + "를" + list_result.get(0).getTime()/60 + "분 "+list_result.get(0).getTime()%60+"초 시작합니다.";
+						}else if(list_result.get(0).getTime()<60){
+
+							toSpeak = list_result.get(0).getTitle() + "를" + list_result.get(0).getTime()%60+"초 시작합니다.";
+						}
+						t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+					}
+					//운동화면으로 넘어간다.
+					Intent intent = new Intent(activity, MainActivity2.class);
+					intent.putExtra("exercise", list_result);
+					startActivity(intent);
+
+				}
+			}
+		});
+		ImageButton statistic=(ImageButton)findViewById(R.id.stat);
+		statistic.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(activity, Statistic.class);
+				intent.putExtra("id", kakaoNickname);
+				startActivity(intent);
+			}
+		});
+
+		ImageButton config=(ImageButton)findViewById(R.id.configuration);
+		config.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 				final Dialog configure=new Dialog(activity);
 				configure.setTitle("설정");
 				//LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(view_main.getWidth(),view_main.getHeight());
@@ -319,7 +477,7 @@ public class MainActivity extends Activity {
 				configure.setContentView(view_configure);
 				configure.show();
 				Window window1 = configure.getWindow();
-				window1.setLayout(lin_back.getWidth(), lin_back.getHeight()*9/10);
+				window1.setLayout(1500, 2000);
 				five_second=(RadioButton)view_configure.findViewById(R.id.five_second);
 				ten_second=(RadioButton)view_configure.findViewById(R.id.ten_second);
 				twenty_second=(RadioButton)view_configure.findViewById(R.id.twenty_second);
@@ -337,180 +495,71 @@ public class MainActivity extends Activity {
 							}
 						}
 
-							Toast.makeText(getApplicationContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
-							if (five_second.isChecked())
-								Log.e("main", "5초");
-							interval_time = 5;
+						Toast.makeText(getApplicationContext(), "저장되었습니다", Toast.LENGTH_SHORT).show();
+						if (five_second.isChecked())
+							Log.e("main", "5초");
+						interval_time = 5;
 
 
-							if (ten_second.isChecked()) {
-								Log.e("main", "10초");
-								interval_time = 10;
-							}
-							if (twenty_second.isChecked()) {
-								Log.e("main", "20초");
-								interval_time = 20;
-							}
-							if (thirty_second.isChecked()) {
-								Log.e("main", "30초");
-								interval_time = 30;
-							}
-							if (direct.isChecked()) {
-								Log.e("main", "?초");
-								interval_time = Integer.parseInt(wished_interval_time.getText().toString());
-							}
+						if (ten_second.isChecked()) {
+							Log.e("main", "10초");
+							interval_time = 10;
+						}
+						if (twenty_second.isChecked()) {
+							Log.e("main", "20초");
+							interval_time = 20;
+						}
+						if (thirty_second.isChecked()) {
+							Log.e("main", "30초");
+							interval_time = 30;
+						}
+						if (direct.isChecked()) {
+							Log.e("main", "?초");
+							interval_time = Integer.parseInt(wished_interval_time.getText().toString());
+						}
 						Log.e("main","인터벌시간은 : "+interval_time);
-							SharedPreferences shared_data = getSharedPreferences("shared_interval_time", 0);
-							SharedPreferences.Editor editor = shared_data.edit();
-							editor.putInt("interval_time", interval_time+1);
-							editor.commit();
+						SharedPreferences shared_data = getSharedPreferences("shared_interval_time", 0);
+						SharedPreferences.Editor editor = shared_data.edit();
+						editor.putInt("interval_time", interval_time+1);
+						editor.commit();
 
-							if (screen_toggle.isChecked()) {
-								screen_on = true;
-							} else {
-								screen_on = false;
-							}
+						if (screen_toggle.isChecked()) {
+							screen_on = true;
+						} else {
+							screen_on = false;
+						}
 
-							SharedPreferences shared_data1 = getSharedPreferences("shared_screen", 0);
-							SharedPreferences.Editor edito1r = shared_data1.edit();
-							edito1r.putBoolean("screen", screen_on);
-							edito1r.commit();
-							Log.e("main", "zzz" + interval_time);
-							if (sound_toggle.isChecked()) {
-								sound = true;
-							} else {
-								sound = false;
-							}
-							SharedPreferences shared_data_sound = getSharedPreferences("shared_sound", 0);
-							SharedPreferences.Editor editor1 = shared_data_sound.edit();
-							editor1.putBoolean("sound", sound);
-							editor1.commit();
+						SharedPreferences shared_data1 = getSharedPreferences("shared_screen", 0);
+						SharedPreferences.Editor edito1r = shared_data1.edit();
+						edito1r.putBoolean("screen", screen_on);
+						edito1r.commit();
+						Log.e("main", "zzz" + interval_time);
+						if (sound_toggle.isChecked()) {
+							sound = true;
+						} else {
+							sound = false;
+						}
+						SharedPreferences shared_data_sound = getSharedPreferences("shared_sound", 0);
+						SharedPreferences.Editor editor1 = shared_data_sound.edit();
+						editor1.putBoolean("sound", sound);
+						editor1.commit();
 
-							if (interval_toggle.isChecked()) {
-								interval_to = true;
+						if (interval_toggle.isChecked()) {
+							interval_to = true;
 
-							} else {
-								interval_to = false;
-							}
+						} else {
+							interval_to = false;
+						}
 
-							configure.dismiss();
+						configure.dismiss();
 					}
 				});
 
 
 
-				break;
-		}
 
-
-		return super.onOptionsItemSelected(item);
-	}
-*/
-
-
-
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		lin_back=(LinearLayout)findViewById(R.id.lin_back);
-		Log.e("main",",,OnWindowFocusChanged!!"+lin_back.getWidth()+","+lin_back.getHeight());
-	}
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		activity=this;
-
-		requestMe();
-		SharedPreferences sd=getSharedPreferences("shared_sound",0);
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		RelativeLayout r1=(RelativeLayout)findViewById(R.id.custom_title2);
-
-
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.custome_title);
-		setContentView(R.layout.list_view);
-
-		ImageButton plus=(ImageButton)findViewById(R.id.exercise_plus);
-		plus.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(),"plus ",Toast.LENGTH_LONG).show();
-				Log.e("main", "운동 추가 ");
-				view=activity.getLayoutInflater().inflate(R.layout.exer_config,null);
-				final Dialog listViewDialog=new Dialog(activity);
-				// 리스트뷰 설정된 레이아웃
-				listViewDialog.setContentView(view);
-
-				Button bt=(Button)view.findViewById(R.id.Exer_start);
-				Window window = listViewDialog.getWindow();
-				window.setLayout(lin_back.getWidth(), lin_back.getHeight()*9/10);
-
-//
-				bt.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						EditText exer_time_min=(EditText)view.findViewById(R.id.exer_time_minute);
-						EditText exer_time_sec=(EditText)view.findViewById(R.id.exer_time_second);
-						int total_time=0;
-						int min=0;
-						int sec=0;
-						if(exer_time_min.getText().toString().equals("")){
-							sec=Integer.parseInt(exer_time_sec.getText().toString());
-
-							total_time=sec;
-							//초만입력했을때
-						}else if(exer_time_sec.getText().toString().equals("")){
-							//분만입력했을때,
-							min=Integer.parseInt(exer_time_min.getText().toString())*60;
-							total_time=min;
-						}else{
-							//분초 모두입력시
-							min=Integer.parseInt(exer_time_min.getText().toString())*60;
-							sec=Integer.parseInt(exer_time_sec.getText().toString());
-							total_time=min+sec;
-						}
-
-						Log.e("main","분,초 : "+total_time);
-
-
-						EditText exer_title=(EditText)view.findViewById(R.id.exer_title);
-						EditText exer_rest=(EditText)view.findViewById(R.id.exer_rest);
-						EditText exer_interval=(EditText)view.findViewById(R.id.exer_interval);
-						if(exer_title.getText().length()==0){
-							Log.e("main","입력해주세요");
-						}else{
-
-							Log.e("main","운동 시작 버튼 클릭"+exer_title.getText()+exer_interval.getText());
-							Log.e("main","clicked!");
-							String query="INSERT INTO exercise " +
-									"(title,time,rest,interval,selected) "+
-									"VALUES('" +exer_title.getText().toString()+ "' , '"+total_time+"','"+exer_rest.getText()+"','"+exer_interval.getText()+"','false')";
-							db.execSQL(query);
-							Log.e("main", "회원가입완료");
-
-							listViewDialog.dismiss();
-
-
-							Exercise ex=new Exercise(Integer.parseInt(exer_interval.getText().toString() ),Integer.parseInt(exer_rest.getText().toString()),
-									total_time, exer_title.getText().toString(),false);
-							list_exercise.add(ex);
-							listviewadapter.setmIdMap(list_exercise);
-							listviewadapter.notifyDataSetChanged();
-							//listviewadapter.setExercise_List(list_exercise);
-							//listviewadapter.setTitle(exer_title.getText().toString());
-
-
-						}
-
-					}
-				});
-
-				// 다이얼로그 보기
-				listViewDialog.show();
 			}
 		});
-
-
 		Log.e("main","OnCreate왔다"+list_exercise_pass);
 		sound=sd.getBoolean("sound",true);
 		SharedPreferences sd_interval=getSharedPreferences("shared_interval_time",0);
@@ -565,7 +614,7 @@ window2.setLayout(view_main.getWidth(),view_main.getHeight()*11/10);*/
 					});
 
 
-			introduction.show();
+//			introduction.show();
 
 			settings.edit().putBoolean("my_first_time",false).commit();
 		}
@@ -724,11 +773,12 @@ params.height=totalHeight+(listView.getDividerHeight()*(listView.getCount()-1));
 			@Override
 			public void onSuccess(UserProfile userProfile) {
 				String kakaoID = String.valueOf(userProfile.getId()); // userProfile에서 ID값을 가져옴
-				kakaoNickname = userProfile.getNickname();     // Nickname 값을 가져옴
 				String email=userProfile.getEmail();
+				kakaoNickname = email.split("@")[0];     // Nickname 값을 가져옴
+
 				String image=userProfile.getThumbnailImagePath();
 				Log.e("main",  "d"+userProfile+"nick : "+kakaoNickname);
-
+				Log.e("main", "id "+email.split("@")[0]);
 
 
 				TextView title=(TextView)findViewById(R.id.my);

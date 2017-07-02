@@ -13,7 +13,7 @@
 	</style>
 	<style name="NO12" parent="Theme.AppCompat.Light.NoActionBar"/>
 	<style name="CustomTitle" parent="android:Theme">
-		<item name="android:windowTitleSize">80dp</item>
+		<item name="android:windowTitleSize">85dp</item>
 		<item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
 	</style>
 

@@ -1561,8 +1561,7 @@ public class MainActivity2 extends AppCompatActivity {
 		view_rest.setText("휴식시간 :"+ex.get(0).getRest());
 		 view_interval=(TextView)findViewById(R.id.view_interval);
 		Log.e("main","반복횟수 : "+ex.get(0).getInterval());
-		view_interval.setText("반복횟수 :"+ex.get(0).getInterval());
-		view_time=(TextView)findViewById(R.id.view_time);
+		view_interval.setText("okhttpViewById(R.id.view_time);
 		if(ex.get(0).getTime()>60){
 			if(ex.get(0).getTime()%60==0){
 				view_time.setText("시간:"+ex.get(0).getTime()/60+"분");

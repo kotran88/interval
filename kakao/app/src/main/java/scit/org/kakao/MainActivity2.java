@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,17 +17,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity2 extends AppCompatActivity {
 	int time;
 	private Activity activity;
 	int fin;
 	int fin_first;
+	int fin_time=0;
 	boolean Sound=true;
 	LinearLayout lin_lay;
 	TextView LeftTime;
@@ -66,8 +77,10 @@ public class MainActivity2 extends AppCompatActivity {
 	Vibrator vibrator;
 	boolean Finish=false;
 	boolean end_this=false;
+	TextView total_time;
 	long pattern[]={50,100};
 	ArrayList<View> view_collection;
+	boolean sending =true;
 	public enum Rest{SUPERLEAST("10초"),LEAST("20초"),MIDIUM("30초"),LAGEST("40초"),SUPERLARGE("50초");
 		private String span;
 		Rest(String months){
@@ -120,6 +133,21 @@ public class MainActivity2 extends AppCompatActivity {
 
 	private boolean thisisEnd;
 	private boolean thhe_end;
+	public void sendingStatistic(String title, int time){
+		OkHttpClient client = new OkHttpClient();
+		Log.e("main","보낼것은 : "+title +" : "+time);
+		String [] values={title,""+time};
+		new registering(values).execute();
+
+	}
+	public void speaking(String mention){
+		String toSpeak=mention;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			t1.speak(toSpeak,TextToSpeech.QUEUE_FLUSH,null,null);
+		} else {
+			t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+		}
+	}
 	private Runnable mHandlerTimer=new Runnable() {
 		@Override
 		public void run() {
@@ -135,6 +163,8 @@ public class MainActivity2 extends AppCompatActivity {
 					if(position>1) {
 						count_first = 0;
 						Log.e("main", WhatNow + "whatnowwww" + checked);
+						//운동끝!
+						Log.e("main","운동 이름 , : "+fin_first+"운동 시간 : "+title+"time : "+(fin_first-1));
 
 
 						lin_lay.setBackgroundResource(R.drawable.rest);
@@ -281,6 +311,8 @@ public class MainActivity2 extends AppCompatActivity {
 								Log.e("main","Flag_end : "+flag_end);
 								//2번째
 								Finish=true;
+								String toSpeak=ex.get(1).getTitle()+"를 시작합니다.";
+								speaking(toSpeak);
 								total_size.setText("총 운동수 "+ex.size()+"가지중 2번째 운동입니다.");
 								title=ex.get(1).getTitle();
 								view_title.setText(""+ex.get(1).getTitle());
@@ -362,6 +394,8 @@ public class MainActivity2 extends AppCompatActivity {
 									Log.e("main3","else");
 									WhatNow=1;
 									interval_rest=false;
+									String toSpeak=ex.get(1).getTitle()+"를 시작합니다.";
+									speaking(toSpeak);
 									view_interval.setVisibility(View.VISIBLE);
 									total_size.setText("총 운동수 "+ex.size()+"가지중 2번째 운동입니다.");
 									title=ex.get(1).getTitle();
@@ -414,6 +448,8 @@ public class MainActivity2 extends AppCompatActivity {
 								}else{
 									WhatNow=2;
 									view_interval.setVisibility(View.VISIBLE);
+									String toSpeak=ex.get(2).getTitle()+"를 시작합니다.";
+									speaking(toSpeak);
 									total_size.setText("총 운동수 "+ex.size()+"가지중 3번째 운동입니다.");
 									title=ex.get(2).getTitle();
 									view_title.setText(""+ex.get(2).getTitle());
@@ -492,6 +528,8 @@ public class MainActivity2 extends AppCompatActivity {
 									view_interval.setVisibility(View.VISIBLE);
 									total_size.setText("총 운동수 "+ex.size()+"가지중 2번째 운동입니다.");
 									title=ex.get(1).getTitle();
+									String toSpeak=ex.get(1).getTitle()+"를 시작합니다.";
+									speaking(toSpeak);
 									view_title.setText(""+ex.get(1).getTitle());
 									view_rest.setText("휴식시간 :"+ex.get(1).getRest());
 									view_interval.setText("반복횟수 :"+ex.get(1).getInterval());
@@ -543,6 +581,8 @@ public class MainActivity2 extends AppCompatActivity {
 									view_interval.setVisibility(View.VISIBLE);
 									total_size.setText("총 운동수 "+ex.size()+"가지중 3번째 운동입니다.");
 									title=ex.get(2).getTitle();
+									String toSpeak=ex.get(2).getTitle()+"를 시작합니다.";
+									speaking(toSpeak);
 									view_title.setText(""+ex.get(2).getTitle());
 									view_rest.setText("휴식시간 :"+ex.get(2).getRest());
 									view_interval.setText("반복횟수 :"+ex.get(2).getInterval());
@@ -595,6 +635,8 @@ public class MainActivity2 extends AppCompatActivity {
 									Log.e("main3","마지막운동22222222222222");
 									total_size.setText("총 운동수 "+ex.size()+"가지중 4번째 운동입니다.");
 									title=ex.get(3).getTitle();
+									String toSpeak=ex.get(3).getTitle()+"를 시작합니다.";
+									speaking(toSpeak);
 									view_title.setText(""+ex.get(3).getTitle());
 									view_rest.setText("휴식시간 :"+ex.get(3).getRest());
 									view_interval.setText("반복횟수 :"+ex.get(3).getInterval());
@@ -672,6 +714,8 @@ public class MainActivity2 extends AppCompatActivity {
 									view_interval.setVisibility(View.VISIBLE);
 									total_size.setText("총 운동수 "+ex.size()+"가지중 2번째 운동입니다.");
 									title=ex.get(1).getTitle();
+									String toSpeak=ex.get(1).getTitle()+"를 시작합니다.";
+									speaking(toSpeak);
 									view_title.setText(""+ex.get(1).getTitle());
 									view_rest.setText("휴식시간 :"+ex.get(1).getRest());
 									view_interval.setText("반복횟수 :"+ex.get(1).getInterval());
@@ -723,6 +767,8 @@ public class MainActivity2 extends AppCompatActivity {
 									view_interval.setVisibility(View.VISIBLE);
 									total_size.setText("총 운동수 "+ex.size()+"가지중 3번째 운동입니다.");
 									title=ex.get(2).getTitle();
+									String toSpeak=ex.get(2).getTitle()+"를 시작합니다.";
+									speaking(toSpeak);
 									view_title.setText(""+ex.get(2).getTitle());
 									view_rest.setText("휴식시간 :"+ex.get(2).getRest());
 									view_interval.setText("반복횟수 :"+ex.get(2).getInterval());
@@ -775,6 +821,8 @@ public class MainActivity2 extends AppCompatActivity {
 									Log.e("main","마지막운동22222222222222");
 									total_size.setText("총 운동수 "+ex.size()+"가지중 4번째 운동입니다.");
 									title=ex.get(3).getTitle();
+									String toSpeak=ex.get(3).getTitle()+"를 시작합니다.";
+									speaking(toSpeak);
 									view_title.setText(""+ex.get(3).getTitle());
 									view_rest.setText("휴식시간 :"+ex.get(3).getRest());
 									view_interval.setText("반복횟수 :"+ex.get(3).getInterval());
@@ -833,6 +881,8 @@ public class MainActivity2 extends AppCompatActivity {
 										view_interval.setVisibility(View.VISIBLE);
 										Interval_Doing = false;
 										Log.e("main", "마지막운동22222222222222");
+										String toSpeak=ex.get(4).getTitle()+"를 시작합니다.";
+										speaking(toSpeak);
 										total_size.setText("총 운동수 " + ex.size() + "가지중 5번째 운동입니다.");
 										title = ex.get(4).getTitle();
 										view_title.setText("" + ex.get(4).getTitle());
@@ -874,6 +924,9 @@ public class MainActivity2 extends AppCompatActivity {
 				}else{
 				//남은시간이 계속있을때, fin을 줄여줌.
 				Log.e("main","게임이번판 시작 ");
+
+//				if()
+//				sending=true;
 				count_first++;
 
 				if(count_first==1){
@@ -881,8 +934,12 @@ public class MainActivity2 extends AppCompatActivity {
 					position_first++;
 				}
 				if(flag==false){
-
+					if(fin==1){
+						sendingStatistic( title, (fin_first-1));
+					}
+					Log.e("main","1111111111");
 				}else{
+					Log.e("main","2222222");
 					lin_lay.setBackgroundResource(R.drawable.i_white);
 				}
 				if(position<1){
@@ -990,6 +1047,7 @@ public class MainActivity2 extends AppCompatActivity {
 					//mHandler.removeCallbacks(mHandlerTimer);
 					total_size.setText("총 운동수 "+ex.size()+"가지중 3번째 운동입니다.");
 					view_title.setText(""+ex.get(2).getTitle());
+
 					view_rest.setText("휴식시간 :"+ex.get(2).getRest());
 					Log.e("main","t반복횟수(현재)"+ex.get(2).getInterval()+"("+(count)+")");
 
@@ -1344,7 +1402,9 @@ public class MainActivity2 extends AppCompatActivity {
 				}
 
 				fin--;
-
+				fin_time++;
+				total_time.setText("시간:"+fin_time);
+				Log.e("main","총 경과시간 : "+fin_time);
 				if(title.equals("운동중 쉬기")) {
 					lin_lay.setBackgroundResource(R.drawable.rest);
 					view_interval.setVisibility(View.INVISIBLE);
@@ -1390,7 +1450,7 @@ public class MainActivity2 extends AppCompatActivity {
 				}
 
 
-				Log.e("main","count_first : "+count_first+"현재 진행중인 타이틀은 : "+title);
+				Log.e("main","count_first : "+count_first+"현재 진행중인 타이틀은 : "+title+"find first : "+fin_first);
 				Log.e("main", fin+","+restingTime+","+flag);
 
 
@@ -1411,9 +1471,9 @@ public class MainActivity2 extends AppCompatActivity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		view_collection=new ArrayList<View>();
 
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		activity.setTheme(R.style.NO12);
 		setContentView(R.layout.activity_main);
+		total_time=(TextView)findViewById(R.id.total_time);
 		 LeftTime=(TextView)findViewById(R.id.LeftTime);
 		vibrator=(Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
 		t1= new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
@@ -1424,7 +1484,29 @@ public class MainActivity2 extends AppCompatActivity {
 				}
 			}
 		});
-
+		//screen_on
+		Switch toggle1 = (Switch) findViewById(R.id.always_on_setting);
+		toggle1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+					Toast.makeText(getApplicationContext(),"화면켜짐유지합니다.",Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(getApplicationContext(),"화면이 시간이 경과하면 꺼집니다.",Toast.LENGTH_SHORT).show();
+					getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+				}
+			}
+		});
+		Switch toggle = (Switch) findViewById(R.id.sound_vibrate_setting);
+		toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					Toast.makeText(getApplicationContext(),"체크됨",Toast.LENGTH_SHORT).show();
+				} else {
+					Toast.makeText(getApplicationContext(),"ss",Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 		ex= (ArrayList<Exercise>) getIntent().getSerializableExtra("exercise");
 		SharedPreferences screen=getSharedPreferences("shared_screen",0);
 		boolean screen_on=screen.getBoolean("screen",false);
@@ -1563,26 +1645,20 @@ public class MainActivity2 extends AppCompatActivity {
 	public void onClick_Exercise(View v){
 
 		String id=new Integer(v.getId()).toString();
-		Log.e("main"," 클릭된222 것은 : "+"zzzz"+id);
-		if(v.getId()==Integer.parseInt("2131624018")){
+		if(v.getId()==R.id.before){
 			//before
 			jump="one";
-			Log.e("main","첫번째것 클릭됨");
-		}else if(id.equals("2131624020")){
-			Log.e("main","3번째것 클릭됨");
+		}else if(v.getId()==R.id.future){
 			//now
 			jump="three";
-			Log.e("main","31번째"+third);
 
-		}else if(id.equals("2131624019")){
-			Log.e("main","2번째것 클릭됨");
+		}else if(v.getId()==R.id.now){
 			jump="two";
 
-		}else if(id.equals("2131624021")){
+		}else if(v.getId()==R.id.future_further){
 			jump="four";
-		}else if(id.equals("2131624022")){
+		}else if(v.getId()==R.id.futureOfFuture){
 			jump="five";
-			Log.e("main","다섯번째 클릭됨 : "+jump);
 		}
 	}
 
@@ -1619,6 +1695,38 @@ public class MainActivity2 extends AppCompatActivity {
 
 	}
 
+}
+class registering extends AsyncTask<Void,Void,Void> {
+	private String[] param;
+	public registering(String[] messages) {
+		param = messages;
+	}
+	@Override
+	protected Void doInBackground(Void... params) {
+
+		Log.e("main","doinBack"+param[0]+"");
+		Log.e("main","doinBack"+param[1]+"");
+		Log.e("main","Length"+param.length+"");
+		Log.e("main","Length"+param[0]+"");
+
+		OkHttpClient client = new OkHttpClient();
+		String urlll="http://52.78.115.181/register?title="+param[0]+"&time="+param[1]+"&user_id=kotran";
+		Log.e("main","if : "+urlll);
+		Request request = new Request.Builder()
+				.addHeader("content-type","charset=utf-8")
+				.url(urlll)
+				.build();
+
+		try {
+			Log.e("main","1111111111111");
+			Response response = client.newCall(request).execute();
+			Log.e("main","2222222222222");
+			Log.e("main","response : "+response);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
 
 

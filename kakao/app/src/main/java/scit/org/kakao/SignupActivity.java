@@ -137,9 +137,8 @@ public class SignupActivity extends Activity {
                 String email=userProfile.getEmail();
                 String image=userProfile.getThumbnailImagePath();
                 Log.e("main",  "d"+userProfile+"nick : "+kakaoNickname);
-                webView.loadUrl("http://52.78.115.181/stat/"+email.substring(0,5));
-                urlTask task=new urlTask();
-                task.execute(email);
+
+
                 //  redirectMainActivity(); // 로그인 성공시 MainActivity로
 
 
@@ -182,30 +181,4 @@ class ResultBrowser extends WebViewClient{
         return false;
     }
 }
- class urlTask extends AsyncTask<String,String,Long>{
 
-
-     @Override
-     protected Long doInBackground(String... params) {
-
-            Log.e("main","doinBack"+params[0]+"");
-         Log.e("main","Length"+params.length+"");
-
-         OkHttpClient client = new OkHttpClient();
-
-         Request request = new Request.Builder()
-                 .url("http://52.78.115.181/stat/"+"nameaneee")
-                 .build();
-         try {
-             Response response = client.newCall(request).execute();
-             Log.e("main",""+response);
-
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-
-
-
-         return null;
-     }
- }
